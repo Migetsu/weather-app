@@ -7,10 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import router from './router'
 
 const app = createApp(App)
 const pinia = createPinia()
 app.use(pinia)
+app.use(router)
 app.directive('focus', {
   mounted: (el) => {
     el.focus();

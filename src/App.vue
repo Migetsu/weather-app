@@ -1,96 +1,53 @@
 <template>
-  <main class="main">
-    <div class="left">
-      <PaneLeft :dayData="data" :activeIndex="activeIndex" />
+  <div class="app-container">
+    <Navbar />
+    <div class="page-content">
+      <Search />
+      <router-view />
     </div>
-    <div class="right">
-      <PaneRight 
-      :data="data"
-      :error="error"
-      :active-index="activeIndex"
-      @select-index="onSelectIndex" />
   </div>
-  </main>
-  
 </template>
 
 <script setup>
-import PaneRight from "@/components/PaneRight.vue";
-import PaneLeft from "@/components/PaneLeft.vue";
-import { ref, provide, watch, onMounted } from "vue";
-import { cityProvide, API_ENDPOINT } from "@/constants.js";
-
-let data = ref()
-let error = ref(null)
-let activeIndex = ref(0)
-let city = ref('Ташкент')
-
-provide(cityProvide, city)
-
-function onSelectIndex(i) {
-  activeIndex.value = i
-}
-
-watch(city, () => {
-  getCity(city.value)
-})
-
-onMounted(() => {
-  getCity(city.value) 
-})
-
-async function getCity(city) {
-  try {
-    error.value = null;
-
-    const params = new URLSearchParams({
-      q: city,
-      lang: "ru",
-      key: "3077d7bf5b2846ab8e4174434252010",
-      days: 3
-    })
-    const res = await fetch(`${API_ENDPOINT}/forecast.json?${params.toString()}`);
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      error.value = {
-        code: errorData.error?.code,
-        message: errorData.error?.message || `Ошибка ${res.status}: ${res.statusText}`
-      };
-      data.value = null
-      return;
-    }
-
-    error.value = null;
-    data.value = await res.json();
-  } catch (err) {
-    error.value = {
-      code: 'NETWORK_ERROR',
-      message: `Ошибка сети: ${err.message}`
-    };
-  }
-}
+import Navbar from "./components/Navbar.vue";
+import Search from "@/components/Search.vue";
 </script>
 
 <style scoped lang="scss">
-.main {
+.app-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 48px;
+  height: 100vh;
+  padding: 32px;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  @include respond(md) {
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  @include respond(sm) {
+    gap: 16px;
+    padding: 16px;
+  }
 }
 
-.right {
-  background: $color-bg-main;
-  padding: 60px 50px;
-  border-radius: 25px;
-}
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 0;
 
-.left {
-  width: 500px;
-  height: 660px;
-  border-radius: 30px;
-  background-image: url('@/assets/images/bg-weather.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  @include respond(md) {
+    gap: 16px;
+  }
+
+  @include respond(sm) {
+    gap: 12px;
+  }
 }
 </style>
