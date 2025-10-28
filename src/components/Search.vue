@@ -49,14 +49,12 @@ const selectedIndex = ref(-1);
 const isLoading = ref(false);
 let debounceTimer = null;
 
-// Очистка таймера при размонтировании компонента
 onUnmounted(() => {
   if (debounceTimer) {
     clearTimeout(debounceTimer);
   }
 });
 
-// Следим за изменениями в поисковом запросе
 watch(searchQuery, () => {
   handleInput();
 });
@@ -82,14 +80,13 @@ const handleInput = () => {
       cities.value = [];
       isDropdownVisible.value = false;
     }
-  }, 300); // Задержка в 300мс
+  }, 300);
 };
 
 const handleSubmit = async () => {
   if (selectedIndex.value >= 0 && cities.value[selectedIndex.value]) {
     await selectCity(cities.value[selectedIndex.value]);
   } else if (searchQuery.value.length >= 2) {
-    // Если нет выбранного города, используем первый из списка или текущий запрос
     const cityToSearch = cities.value[0]
       ? cities.value[0].name
       : searchQuery.value;
@@ -148,13 +145,6 @@ const resetDropdown = () => {
   isDropdownVisible.value = false;
   selectedIndex.value = -1;
 };
-
-// Очистка таймера при размонтировании компонента
-onUnmounted(() => {
-  if (debounceTimer) {
-    clearTimeout(debounceTimer);
-  }
-});
 </script>
 
 <style scoped lang="scss">
@@ -162,6 +152,14 @@ onUnmounted(() => {
   width: 100%;
   max-width: 1980px;
   margin-bottom: 32px;
+
+  @include respond(lg) {
+    margin-bottom: 24px;
+  }
+
+  @include respond(md) {
+    margin-bottom: 16px;
+  }
 }
 
 .search-wrapper {
@@ -189,6 +187,17 @@ onUnmounted(() => {
   border: 2px solid transparent;
   transition: all 0.2s ease;
 
+  @include respond(md) {
+    height: 44px;
+    padding: 8px 14px;
+  }
+
+  @include respond(sm) {
+    height: 40px;
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
   &:focus {
     outline: none;
     border-color: rgba($color-secondary, 0.3);
@@ -212,6 +221,14 @@ onUnmounted(() => {
   overflow-y: auto;
   z-index: 1000;
 
+  @include respond(md) {
+    max-height: 250px;
+  }
+
+  @include respond(sm) {
+    max-height: 200px;
+  }
+
   &-item {
     padding: 12px 16px;
     display: flex;
@@ -220,6 +237,14 @@ onUnmounted(() => {
     cursor: pointer;
     transition: background-color 0.2s ease;
 
+    @include respond(md) {
+      padding: 10px 14px;
+    }
+
+    @include respond(sm) {
+      padding: 8px 12px;
+    }
+
     &:hover {
       background-color: rgba($color-secondary, 0.1);
     }
@@ -227,23 +252,32 @@ onUnmounted(() => {
     .city-name {
       font-weight: 500;
       color: $color-secondary;
+
+      @include respond(sm) {
+        font-size: 14px;
+      }
     }
 
     .city-region {
       font-size: 14px;
       color: rgba($color-secondary, 0.6);
+
+      @include respond(sm) {
+        font-size: 12px;
+      }
     }
 
     &.active {
       background-color: rgba($color-secondary, 0.1);
     }
   }
-}
 
-// Стилизация скроллбара
-.search-dropdown {
   &::-webkit-scrollbar {
     width: 8px;
+
+    @include respond(sm) {
+      width: 6px;
+    }
   }
 
   &::-webkit-scrollbar-track {

@@ -22,6 +22,7 @@ defineProps({
 <style scoped lang="scss">
 .item {
   flex: 1;
+  min-width: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,6 +31,24 @@ defineProps({
   padding: 0 12px;
   height: 100%;
   justify-content: center;
+
+  @include respond(md) {
+    min-width: 70px;
+    padding: 0 8px;
+    gap: 10px;
+  }
+
+  @include respond(sm) {
+    min-width: 60px;
+    padding: 0 6px;
+    gap: 8px;
+  }
+
+  @include respond(xs) {
+    min-width: 55px;
+    padding: 0 4px;
+    gap: 6px;
+  }
 
   &:last-child {
     border-right: none;
@@ -40,6 +59,18 @@ defineProps({
     color: $color-primary;
     margin: 0;
     line-height: 1;
+
+    @include respond(md) {
+      font-size: 13px;
+    }
+
+    @include respond(sm) {
+      font-size: 12px;
+    }
+
+    @include respond(xs) {
+      font-size: 11px;
+    }
   }
 
   &-icon {
@@ -47,6 +78,21 @@ defineProps({
     height: v-bind('isCompact ? "42px" : "32px"');
     flex-shrink: 0;
     color: gold;
+
+    @include respond(md) {
+      width: 36px;
+      height: 30px;
+    }
+
+    @include respond(sm) {
+      width: 32px;
+      height: 26px;
+    }
+
+    @include respond(xs) {
+      width: 28px;
+      height: 22px;
+    }
   }
 
   &-temp {
@@ -55,22 +101,17 @@ defineProps({
     color: $color-secondary;
     margin: 0;
     line-height: 1;
-  }
-}
 
-@media (max-width: 768px) {
-  .item {
-    &-time {
+    @include respond(md) {
+      font-size: 18px;
+    }
+
+    @include respond(sm) {
+      font-size: 16px;
+    }
+
+    @include respond(xs) {
       font-size: 14px;
-    }
-
-    &-icon {
-      width: 48px;
-      height: 36px;
-    }
-
-    &-temp {
-      font-size: 20px;
     }
   }
 }

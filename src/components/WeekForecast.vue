@@ -17,8 +17,7 @@
           <span class="weekforecast__card-condition">{{ day.condition }}</span>
         </div>
         <div class="weekforecast__card-temp">
-          {{ day.maxTemp }}{{ day.tempUnit }} / {{ day.minTemp
-          }}{{ day.tempUnit }}
+          {{ day.maxTemp }}{{ day.tempUnit }} / {{ day.minTemp }}{{ day.tempUnit }}
         </div>
       </div>
     </div>
@@ -44,8 +43,14 @@ const weekData = computed(() => getWeekForecast());
   flex-direction: column;
   min-height: 0;
 
+  @include respond(lg) {
+    flex: 0 0 auto;
+    min-height: auto;
+    padding: 20px;
+  }
+
   @include respond(md) {
-    margin-top: 20px;
+    margin-top: 0;
     padding: 16px;
   }
 
@@ -57,18 +62,26 @@ const weekData = computed(() => getWeekForecast());
     margin-bottom: 16px;
     flex-shrink: 0;
 
-    &-title {
-      text-transform: uppercase;
-      font-size: 18px;
-      font-weight: 600;
+    @include respond(md) {
+      margin-bottom: 12px;
+    }
 
-      @include respond(md) {
-        font-size: 16px;
-      }
+    @include respond(sm) {
+      margin-bottom: 10px;
+    }
+  }
 
-      @include respond(sm) {
-        font-size: 14px;
-      }
+  &__title {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 600;
+
+    @include respond(md) {
+      font-size: 16px;
+    }
+
+    @include respond(sm) {
+      font-size: 14px;
     }
   }
 
@@ -78,6 +91,14 @@ const weekData = computed(() => getWeekForecast());
     justify-content: space-between;
     min-height: 0;
     flex: 1;
+
+    @include respond(lg) {
+      gap: 8px;
+    }
+
+    @include respond(md) {
+      gap: 6px;
+    }
   }
 
   &__card {
@@ -88,15 +109,18 @@ const weekData = computed(() => getWeekForecast());
     border-bottom: 1px solid rgba($color-secondary, 0.1);
     height: calc((100% - 96px) / 7);
 
+    @include respond(lg) {
+      height: auto;
+      padding: 10px 0;
+    }
+
     @include respond(md) {
       padding: 8px 0;
-      height: auto;
-      margin-bottom: 8px;
+      margin-bottom: 0;
     }
 
     @include respond(sm) {
       padding: 6px 0;
-      margin-bottom: 6px;
     }
 
     &:last-child {
@@ -118,6 +142,11 @@ const weekData = computed(() => getWeekForecast());
       @include respond(sm) {
         font-size: 12px;
         min-width: 50px;
+      }
+
+      @include respond(xs) {
+        font-size: 11px;
+        min-width: 45px;
       }
     }
 
@@ -141,6 +170,11 @@ const weekData = computed(() => getWeekForecast());
       width: 20px;
       height: 20px;
       color: gold;
+
+      @include respond(md) {
+        width: 18px;
+        height: 18px;
+      }
 
       @include respond(sm) {
         width: 16px;
@@ -171,6 +205,11 @@ const weekData = computed(() => getWeekForecast());
 
       @include respond(sm) {
         font-size: 12px;
+        min-width: 55px;
+      }
+
+      @include respond(xs) {
+        font-size: 11px;
         min-width: 50px;
       }
     }

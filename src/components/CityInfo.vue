@@ -40,6 +40,10 @@ const weather = computed(() => getCurrentWeather());
     gap: 24px;
   }
 
+  @include respond(sm) {
+    gap: 16px;
+  }
+
   &__left {
     display: flex;
     flex-direction: column;
@@ -47,6 +51,10 @@ const weather = computed(() => getCurrentWeather());
 
     @include respond(md) {
       align-items: center;
+    }
+
+    @include respond(sm) {
+      gap: 6px;
     }
 
     &-title {
@@ -71,9 +79,17 @@ const weather = computed(() => getCurrentWeather());
       font-size: 16px;
       margin-bottom: 40px;
 
+      @include respond(lg) {
+        margin-bottom: 32px;
+      }
+
+      @include respond(md) {
+        margin-bottom: 24px;
+      }
+
       @include respond(sm) {
         font-size: 14px;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
       }
     }
 

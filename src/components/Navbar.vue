@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <nav class="navbar">
     <ul class="navbar__list">
@@ -47,6 +45,12 @@
   @include respond(md) {
     height: auto;
     margin-bottom: 16px;
+    padding: 12px;
+  }
+
+  @include respond(sm) {
+    padding: 10px;
+    margin-bottom: 12px;
   }
 
   &-logo {
@@ -55,6 +59,12 @@
 
     @include respond(md) {
       display: none;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
   }
 
@@ -70,6 +80,10 @@
       gap: 16px;
     }
 
+    @include respond(sm) {
+      gap: 12px;
+    }
+
     &-icon {
       width: 24px;
       height: 24px;
@@ -77,6 +91,11 @@
       @include respond(sm) {
         width: 20px;
         height: 20px;
+      }
+
+      @include respond(xs) {
+        width: 18px;
+        height: 18px;
       }
     }
 
@@ -96,6 +115,11 @@
 
       @include respond(sm) {
         font-size: 14px;
+      }
+
+      @include respond(xs) {
+        font-size: 12px;
+        gap: 3px;
       }
 
       &:hover {

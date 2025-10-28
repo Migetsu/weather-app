@@ -39,11 +39,37 @@ const visibleItems = computed(() => {
   border-radius: 12px;
   height: v-bind('isExpanded ? "100%" : "85px"');
 
+  @include respond(lg) {
+    height: auto;
+    min-height: 80px;
+    padding: 14px;
+  }
+
+  @include respond(md) {
+    min-height: 70px;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  @include respond(sm) {
+    min-height: 65px;
+    padding: 10px;
+    gap: 8px;
+  }
+
   &-icon {
     font-size: v-bind('isExpanded ? "16px" : "16px"');
     flex-shrink: 0;
     color: $color-secondary;
     margin-top: v-bind('isExpanded ? "0" : "2px"');
+
+    @include respond(md) {
+      font-size: 14px;
+    }
+
+    @include respond(sm) {
+      font-size: 13px;
+    }
   }
 
   &-wrapper {
@@ -57,6 +83,15 @@ const visibleItems = computed(() => {
     color: $color-primary;
     margin-top: 0;
     line-height: 1.2;
+
+    @include respond(md) {
+      font-size: 13px;
+    }
+
+    @include respond(sm) {
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
   }
 
   &-temp {
@@ -68,22 +103,14 @@ const visibleItems = computed(() => {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-}
 
-@media (max-width: 768px) {
-  .content {
-    &-desc {
-      font-size: 14px;
+    @include respond(md) {
+      font-size: 20px;
     }
 
-    &-temp {
-      font-size: 24px;
+    @include respond(sm) {
+      font-size: 18px;
     }
-  }
-
-  :deep(.conditioninfo__bottom) {
-    grid-template-columns: 1fr;
   }
 }
 </style>
